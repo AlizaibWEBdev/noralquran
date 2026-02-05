@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    
+    <!-- Primary SEO Tags -->
+    <title>Nur al-Quran | Read Quran Online with Audio & Tafsir</title>
+    <meta name="description" content="Experience the Holy Quran with Nur al-Quran. Access a premium Mushaf with multi-language translations, crystal-clear audio recitations, and deep tafsir. Ad-free and distraction-free." />
+    <meta name="keywords" content="Quran, Al-Quran, Read Quran Online, Quran Audio, Quran Translation, Mushaf, Tafsir, Islamic App, Holy Quran" />
+    <link rel="canonical" href="https://nural-quran.com/" />
+    <link rel="shortcut icon" href="./quraan.png" type="image/x-icon">
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nural-quran.com/" />
+    <meta property="og:title" content="Nur al-Quran | Noble Word, Illuminated" />
+    <meta property="og:description" content="A premium, distraction-free Quranic experience with high-quality audio recitations, multi-language translations, and deep tafsir integration." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/The-Quran-Project/Quran-Audio/main/banner.png" />
+    <meta property="og:site_name" content="Nur al-Quran" />
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://nural-quran.com/" />
+    <meta name="twitter:title" content="Nur al-Quran | Noble Word, Illuminated" />
+    <meta name="twitter:description" content="Experience the Holy Quran with crystal-clear audio and seamless Mushaf navigation. Free and ad-free." />
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/The-Quran-Project/Quran-Audio/main/banner.png" />
+
+    <!-- PWA / Mobile Theme -->
+    <meta name="theme-color" content="#10b981" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/The-Quran-Project/Quran-Audio/main/icon.png" />
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Nur al-Quran",
+      "url": "https://nural-quran.com/",
+      "description": "A premium, distraction-free Quranic experience with multi-language translations and audio recitations.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://nural-quran.com/#/?search={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              obsidian: '#0f172a',
+              quranGold: '#c5a059',
+            },
+            animation: {
+              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'fade-in': 'fade-in 0.8s ease-out forwards',
+              'slide-up': 'slide-up 0.5s ease-out forwards',
+              'slide-down': 'slide-down 0.4: cubic-bezier(0.16, 1, 0.3, 1) forwards',
+            },
+            keyframes: {
+              'fade-in': {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              'slide-up': {
+                '0%': { transform: 'translateY(10px)', opacity: '0' },
+                '100%': { transform: 'translateY(0)', opacity: '1' },
+              },
+              'slide-down': {
+                '0%': { transform: 'translateY(-100%)', opacity: '0' },
+                '100%': { transform: 'translateY(0)', opacity: '1' },
+              }
+            }
+          },
+        },
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+Arabic:wght@400;600;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --emerald-500-rgb: 16, 185, 129;
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        scroll-behavior: smooth;
+        margin: 0;
+        padding: 0;
+      }
+      
+      /* Professional Arabic Typography */
+      .font-arabic {
+        font-family: 'Scheherazade New', 'Amiri', serif;
+        direction: rtl;
+        line-height: 4.8 !important; /* Optimized for safety and compactness */
+        letter-spacing: 0 !important;
+        word-spacing: 0.4rem !important;
+        font-feature-settings: "kern" 1, "liga" 1;
+        text-rendering: optimizeLegibility;
+      }
+
+      /* Modern Arabic Typography */
+      .font-arabic-sans {
+        font-family: 'Noto Sans Arabic', sans-serif;
+        direction: rtl;
+        line-height: 2.8 !important;
+        letter-spacing: 0;
+        word-spacing: 0.3rem;
+      }
+
+      /* Premium Digital Mushaf Layout */
+      .mushaf-layout {
+        text-align: justify;
+        text-justify: inter-word;
+        direction: rtl;
+        line-height: 4.5 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block;
+        word-spacing: 0.2rem !important;
+        white-space: normal;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .mushaf-layout span {
+        display: inline;
+        vertical-align: baseline;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Ayah separator symbol */
+      .ayah-symbol-container {
+        display: inline-flex;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        width: 1em;
+        height: 1em;
+        vertical-align: middle;
+        margin: 0 0.3rem 0 0.5rem; 
+        line-height: 1;
+        transform: translateY(-0.06em); 
+        flex-shrink: 0;
+      }
+      
+      .ayah-symbol {
+        font-size: 1.2em;
+        color: rgba(16, 185, 129, 0.4);
+        pointer-events: none;
+      }
+      
+      .dark .ayah-symbol { color: rgba(52, 211, 153, 0.25); }
+
+      .ayah-number-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -46%);
+        font-size: 0.35em; 
+        font-weight: 900;
+        font-family: 'Inter', sans-serif;
+        color: rgba(6, 78, 59, 1);
+      }
+      
+      .dark .ayah-number-text { color: rgba(167, 243, 208, 1); }
+
+      .glass-header {
+        background: rgba(252, 252, 249, 0.96);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+      }
+      .dark .glass-header {
+        background: rgba(11, 15, 26, 0.96);
+      }
+
+      /* Mobile adjustments */
+      @media (max-width: 768px) {
+        .mushaf-layout {
+            text-align: right;
+            line-height: 4.2 !important;
+            word-spacing: 0.15rem !important;
+        }
+        .ayah-symbol-container {
+            margin: 0 0.2rem 0 0.4rem;
+        }
+      }
+
+      ::-webkit-scrollbar { width: 4px; height: 4px; }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(16, 185, 129, 0.2);
+        border-radius: 20px;
+      }
+
+      #root { overflow-x: hidden; }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.13.0",
+    "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
+    "react-markdown": "https://esm.sh/react-markdown@^10.1.0",
+    "@google/genai": "https://esm.sh/@google/genai@^1.40.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-[#fcfcf9] dark:bg-[#0b0f1a] text-slate-900 overflow-x-hidden selection:bg-emerald-100 selection:text-emerald-900">
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
