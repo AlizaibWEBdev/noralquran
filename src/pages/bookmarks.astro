@@ -1,0 +1,63 @@
+---
+import Base from '../layouts/Base.astro';
+import { getSurahs, popularName } from '../lib/quran';
+
+// Minimal lookup so the client can build links and labels without an API call.
+const surahs = getSurahs().map((s) => ({ slug: s.slug, name: popularName(s) }));
+---
+
+<Base title="Your Bookmarks – Nur al-Quran" description="Verses you have saved on Nur al-Quran." path="/bookmarks" noindex>
+  <div class="mx-auto max-w-3xl px-4 py-12">
+    <h1 class="text-3xl font-extrabold tracking-tight">Your Bookmarks</h1>
+    <p class="mt-2 text-sm text-slate-500">Saved on this device. Tap ☆ Save on any ayah to add it here.</p>
+    <ul id="bookmark-list" class="mt-8 space-y-3"></ul>
+    <p id="bookmark-empty" hidden class="mt-8 rounded-2xl border border-dashed border-slate-300 p-10 text-center text-slate-500 dark:border-slate-700">
+      No bookmarks yet. <a href="/" class="text-emerald-700 underline dark:text-emerald-400">Start reading</a>.
+    </p>
+  </div>
+  <script is:inline type="application/json" id="surah-index" set:html={JSON.stringify(surahs)} />
+</Base>
+
+<script>
+  import { readBookmarks, STORAGE_KEY } from '../scripts/bookmarks';
+
+  const surahs: { slug: string; name: string }[] = JSON.parse(document.getElementById('surah-index')!.textContent!);
+  const list = document.getElementById('bookmark-list')!;
+  const empty = document.getElementById('bookmark-empty')!;
+
+  function render() {
+    const keys = Object.keys(readBookmarks())
+      .filter((k) => /^\d+:\d+$/.test(k))
+      .sort((a, b) => {
+        const [as, aa] = a.split(':').map(Number);
+        const [bs, ba] = b.split(':').map(Number);
+        return as - bs || aa - ba;
+      });
+    list.replaceChildren(
+      ...keys.map((key) => {
+        const [s, a] = key.split(':').map(Number);
+        const surah = surahs[s - 1];
+        const li = document.createElement('li');
+        li.className = 'flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900';
+        const link = document.createElement('a');
+        link.href = `/surah/${surah.slug}/ayat-${a}`;
+        link.className = 'font-semibold hover:text-emerald-600';
+        link.textContent = `Surah ${surah.name} · Ayah ${a} (${key})`;
+        const remove = document.createElement('button');
+        remove.type = 'button';
+        remove.className = 'text-sm text-slate-400 hover:text-rose-500';
+        remove.textContent = 'Remove';
+        remove.addEventListener('click', () => {
+          const map = readBookmarks();
+          delete map[key];
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(map));
+          render();
+        });
+        li.append(link, remove);
+        return li;
+      }),
+    );
+    empty.hidden = keys.length > 0;
+  }
+  render();
+</script>

@@ -1,0 +1,101 @@
+---
+import Base from '../../layouts/Base.astro';
+import AyahBlock from '../../components/AyahBlock.astro';
+import Facts from '../../components/Facts.astro';
+import Faq from '../../components/Faq.astro';
+import { SITE, fitTitle, getParas, getSurah, paraUrl, popularName, surahUrl, type Para } from '../../lib/quran';
+import { ORDINAL } from '../../lib/names';
+
+export function getStaticPaths() {
+  return getParas().map((para) => ({ params: { n: String(para.number) }, props: { para } }));
+}
+
+interface Props {
+  para: Para;
+}
+
+const { para: p } = Astro.props;
+const path = paraUrl(p.number);
+const first = p.ayahs[0];
+const last = p.ayahs[p.ayahs.length - 1];
+const span = (a: typeof first) => `Surah ${popularName(getSurah(a.surah))} ${a.surah}:${a.number}`;
+const surahs = p.surahs.map(getSurah);
+const sajdas = p.ayahs.filter((a) => a.sajda);
+
+const title = fitTitle(`Quran Para ${p.number} (${p.name})`, [
+  `Read ${ORDINAL(p.number)} Para Online with Translation`,
+  'Read Online with Translation',
+  'Read Online',
+]);
+const description = `Read Para ${p.number} "${p.name}" (Juz ${p.number}) of the Quran online in Arabic with English and Urdu translation and audio. It runs from ${span(first)} to ${span(last)}, ${p.ayahs.length} ayat.`;
+
+// Group the para's ayahs by surah so each surah gets its own heading.
+const groups = surahs.map((s) => ({ s, ayahs: p.ayahs.filter((a) => a.surah === s.number) }));
+
+const faq = [
+  { q: `Where does Para ${p.number} start and end?`, a: `Para ${p.number} (${p.name}) starts at ${span(first)} and ends at ${span(last)}.` },
+  { q: `Which surahs are in Para ${p.number}?`, a: `Para ${p.number} contains ${surahs.map((s) => `Surah ${popularName(s)}`).join(', ')}${surahs.length > 1 ? '' : ' (part)'}.` },
+  { q: `How many ayat are in Para ${p.number}?`, a: `Para ${p.number} has ${p.ayahs.length} ayat, on pages ${p.pages[0]}–${p.pages[1]} of the 604-page Madani mushaf.` },
+  ...(sajdas.length ? [{ q: `Is there a sajdah in Para ${p.number}?`, a: `Yes, at ${sajdas.map(span).join(' and ')}.` }] : []),
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: `Para ${p.number} – ${p.name} (Juz ${p.number})`,
+    alternateName: [`Juz ${p.number}`, `Sipara ${p.number}`, p.arabic],
+    position: p.number,
+    inLanguage: ['ar', 'en', 'ur'],
+    url: SITE + path,
+    isPartOf: { '@type': 'Book', name: 'The Holy Quran', inLanguage: 'ar' },
+  },
+];
+---
+
+<Base title={title} description={description} path={path} crumbs={[{ name: 'Para', url: '/para' }, { name: `Para ${p.number}`, url: path }]} jsonLd={jsonLd} urduFont ogType="article">
+  <div class="mx-auto max-w-4xl px-4">
+    <header class="py-10 text-center">
+      <p class="arabic text-[2.4rem] font-bold text-emerald-800 dark:text-emerald-300" lang="ar">{p.arabic}</p>
+      <h1 class="mt-2 text-3xl font-extrabold tracking-tight sm:text-4xl">Para {p.number}: {p.name}</h1>
+      <p class="mt-3 text-sm text-slate-500">Juz {p.number} · {p.ayahs.length} ayat · {span(first)} to {span(last)}</p>
+      <div class="no-print mt-6 flex flex-wrap justify-center gap-2 text-sm font-semibold">
+        <button type="button" data-play-all class="rounded-full bg-emerald-600 px-5 py-2.5 text-white hover:bg-emerald-700">▶ Listen</button>
+        <button type="button" onclick="window.print()" class="rounded-full border border-slate-200 px-5 py-2.5 hover:border-emerald-500 dark:border-slate-700">Print / Save PDF</button>
+      </div>
+    </header>
+
+    <Facts
+      rows={[
+        ['Para', `${p.number} of 30`],
+        ['Name', p.name],
+        ['Ayat', String(p.ayahs.length)],
+        ['Surahs', surahs.map((s) => ({ text: popularName(s), href: surahUrl(s) }))],
+        ['Mushaf pages', `${p.pages[0]}–${p.pages[1]}`],
+        ['Sajdah', sajdas.length ? sajdas.map((a) => `${a.surah}:${a.number}`).join(', ') : 'None'],
+      ]}
+    />
+
+    {groups.map(({ s, ayahs }) => (
+      <section class="mt-12">
+        <h2 class="border-b-2 border-emerald-600/20 pb-3 text-2xl font-extrabold tracking-tight">
+          <a href={surahUrl(s)} class="hover:text-emerald-700">Surah {popularName(s)}</a>
+          <span class="ml-2 text-base font-normal text-slate-500">ayat {ayahs[0].number}–{ayahs[ayahs.length - 1].number}</span>
+        </h2>
+        {ayahs[0].number === 1 && s.number !== 1 && s.number !== 9 && (
+          <p class="arabic mt-6 text-center" lang="ar">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
+        )}
+        <div class="ayah-list">
+          {ayahs.map((a) => <AyahBlock ayah={a} surah={s} langs={['urdu', 'english']} />)}
+        </div>
+      </section>
+    ))}
+
+    <Faq title={`Para ${p.number}: common questions`} items={faq} />
+
+    <nav class="no-print mt-16 grid gap-3 sm:grid-cols-2" aria-label="Para navigation">
+      {p.number > 1 ? <a href={paraUrl(p.number - 1)} class="rounded-2xl border border-slate-200 p-5 hover:border-emerald-500 dark:border-slate-800">← Para {p.number - 1}</a> : <span />}
+      {p.number < 30 && <a href={paraUrl(p.number + 1)} class="rounded-2xl border border-slate-200 p-5 text-right hover:border-emerald-500 dark:border-slate-800">Para {p.number + 1} →</a>}
+    </nav>
+  </div>
+</Base>

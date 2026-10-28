@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+import { TRANSLATIONS } from '../lib/quran';
+---
+
+<Base
+  title="About Nur al-Quran – Sources, Translations & Tafsir"
+  description="Where the Quran text, translations, tafsir and audio on Nur al-Quran come from: Tanzil Uthmani text, Saheeh International, Fateh Muhammad Jalandhry, Muhiuddin Khan, Ibn Kathir and more."
+  path="/about"
+  crumbs={[{ name: 'About', url: '/about' }]}
+>
+  <article class="mx-auto max-w-3xl space-y-6 px-4 py-10 leading-relaxed text-slate-700 dark:text-slate-300">
+    <h1 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">About Nur al-Quran</h1>
+    <p>Nur al-Quran is a free, ad-free website for reading and listening to the Holy Quran with translation and commentary. All text is drawn from established, openly published sources, listed below.</p>
+
+    <h2 class="pt-4 text-xl font-bold text-slate-900 dark:text-white">Arabic text</h2>
+    <p>The Arabic text is the Uthmani script from the <a href="https://tanzil.net" class="text-emerald-700 underline dark:text-emerald-400" rel="noopener">Tanzil Project</a>, served through the <a href="https://alquran.cloud" class="text-emerald-700 underline dark:text-emerald-400" rel="noopener">AlQuran Cloud</a> API. Juz, page, ruku, manzil and sajdah positions follow the 604-page Madani mushaf.</p>
+
+    <h2 class="pt-4 text-xl font-bold text-slate-900 dark:text-white">Translations</h2>
+    <ul class="list-inside list-disc">
+      {Object.values(TRANSLATIONS).map((t) => <li>{t.label}: {t.translator}</li>)}
+      <li>Transliteration: English transliteration (Tanzil)</li>
+    </ul>
+
+    <h2 class="pt-4 text-xl font-bold text-slate-900 dark:text-white">Tafsir</h2>
+    <p>Commentary on each ayah comes from Tafsir Ibn Kathir, Ma'ariful Qur'an (Mufti Muhammad Shafi) and Tazkirul Quran (Maulana Wahiduddin Khan), via the <a href="https://quranapi.pages.dev" class="text-emerald-700 underline dark:text-emerald-400" rel="noopener">Quran API</a> project.</p>
+
+    <h2 class="pt-4 text-xl font-bold text-slate-900 dark:text-white">Audio</h2>
+    <p>Recitation by Mishary Rashid Alafasy, hosted by <a href="https://github.com/The-Quran-Project" class="text-emerald-700 underline dark:text-emerald-400" rel="noopener">The Quran Project</a>.</p>
+  </article>
+</Base>

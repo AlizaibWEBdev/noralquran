@@ -1,0 +1,46 @@
+---
+import { TRANSLATIONS, ayahUrl, popularName, type Ayah, type Lang, type Surah } from '../lib/quran';
+
+interface Props {
+  ayah: Ayah;
+  surah: Surah;
+  langs: Lang[];
+  // Link the verse number to its own ayah page (off on the ayah page itself).
+  link?: boolean;
+  // Show "Surah X 36:5" instead of just "36:5" (collections, paras span surahs).
+  showSurah?: boolean;
+}
+
+const { ayah, surah, langs, link = true, showSurah = false } = Astro.props;
+const key = `${ayah.surah}:${ayah.number}`;
+const label = `Surah ${popularName(surah)} · Ayah ${ayah.number}`;
+const tag = showSurah ? `${popularName(surah)} ${key}` : key;
+---
+
+<article class="ayah border-b border-slate-100 px-2 py-8 dark:border-slate-800/60" id={`ayah-${ayah.number}`} data-ayah={key} data-label={label}>
+  <div class="no-print mb-4 flex items-center justify-between gap-2 text-xs font-semibold">
+    {link
+      ? <a href={ayahUrl(surah, ayah.number)} class="rounded-full bg-slate-100 px-3 py-1 text-slate-600 hover:bg-emerald-600 hover:text-white dark:bg-slate-800 dark:text-slate-300">{tag}</a>
+      : <span class="rounded-full bg-slate-100 px-3 py-1 text-slate-600 dark:bg-slate-800 dark:text-slate-300">{tag}</span>}
+    <div class="flex items-center gap-1 text-slate-500">
+      {ayah.sajda && <span class="rounded-full bg-amber-100 px-2 py-1 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300">Sajda</span>}
+      <button type="button" data-play={key} class="rounded-lg px-2 py-1 hover:text-emerald-600" aria-label={`Play ayah ${key}`}>▶ Play</button>
+      <button type="button" data-bookmark={key} class="rounded-lg px-2 py-1 hover:text-emerald-600" aria-pressed="false">☆ Save</button>
+      {link && <a href={`${ayahUrl(surah, ayah.number)}#tafsir`} class="rounded-lg px-2 py-1 hover:text-emerald-600">Tafsir</a>}
+    </div>
+  </div>
+  <p class="arabic text-right text-slate-900 dark:text-slate-50" lang="ar" dir="rtl">
+    {ayah.arabic}<span class="ayah-mark" aria-label={`Ayah ${ayah.number}`}>{ayah.number}</span>
+  </p>
+  <p class="translit mt-3 text-sm italic text-slate-500 dark:text-slate-400">{ayah.transliteration}</p>
+  {langs.map((l) => (
+    <p
+      class:list={['translation mt-3 leading-relaxed text-slate-700 dark:text-slate-300', l === 'urdu' ? 'urdu text-right text-lg' : 'text-base']}
+      lang={TRANSLATIONS[l].code}
+      dir={TRANSLATIONS[l].dir}
+    >
+      {langs.length > 1 && <span class="mr-2 text-[10px] font-bold uppercase tracking-wider text-emerald-700/70 dark:text-emerald-400/70" dir="ltr">{TRANSLATIONS[l].label}</span>}
+      {ayah[l]}
+    </p>
+  ))}
+</article>

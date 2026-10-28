@@ -1,0 +1,114 @@
+---
+// Shared body for /surah/[slug] (English) and /surah/[slug]/[lang] (Urdu, Bangla).
+import Base from '../layouts/Base.astro';
+import AyahBlock from './AyahBlock.astro';
+import Facts from './Facts.astro';
+import Faq from './Faq.astro';
+import { SITE, TRANSLATIONS, fitTitle, getSurah, popularName, surahTitle, surahTitleFull, surahUrl, ayahUrl, truncate, type Lang, type Surah } from '../lib/quran';
+import { aboutSurah, surahDescription, surahFacts, surahFaq } from '../lib/content';
+import { COLLECTIONS } from '../lib/collections';
+
+interface Props {
+  surah: Surah;
+  lang: Lang;
+}
+
+const { surah: s, lang } = Astro.props;
+const tr = TRANSLATIONS[lang];
+const path = surahUrl(s, lang);
+const prev = s.number > 1 ? getSurah(s.number - 1) : null;
+const next = s.number < 114 ? getSurah(s.number + 1) : null;
+const otherLangs = (Object.keys(TRANSLATIONS) as Lang[]).filter((l) => l !== lang);
+const inCollections = COLLECTIONS.filter((c) => c.passages.some((p) => p.surah === s.number));
+
+const title =
+  lang === 'english'
+    ? fitTitle(surahTitleFull(s), ['Read Online with English Translation & Audio', 'Read Online with Translation & Audio', 'Read Online with Translation', 'Read Online'])
+    : fitTitle(`${surahTitle(s)} with ${tr.label} Translation`, ['Read Online', 'Online']);
+const h1 = lang === 'english' ? surahTitleFull(s) : `${surahTitle(s)} with ${tr.label} Translation`;
+const fullAudio = s.audio[0];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Chapter',
+    name: `${surahTitle(s)} (${s.arabicName})`,
+    alternateName: [s.name, s.arabicName, ...s.aliases],
+    position: s.number,
+    inLanguage: ['ar', tr.code],
+    url: SITE + path,
+    isPartOf: { '@type': 'Book', name: 'The Holy Quran', inLanguage: 'ar' },
+    translator: { '@type': 'Person', name: tr.translator },
+    description: truncate(s.ayahs.map((a) => a[lang]).join(' '), 300),
+    audio: fullAudio && { '@type': 'AudioObject', contentUrl: fullAudio.url, name: `${surahTitle(s)} – ${fullAudio.reciter}`, encodingFormat: 'audio/mpeg' },
+  },
+];
+---
+
+<Base
+  title={title}
+  description={surahDescription(s, lang)}
+  path={path}
+  crumbs={lang === 'english' ? [{ name: surahTitle(s), url: path }] : [{ name: surahTitle(s), url: surahUrl(s) }, { name: `${tr.label} translation`, url: path }]}
+  jsonLd={jsonLd}
+  urduFont={lang === 'urdu'}
+  ogType="article"
+>
+  <div class="mx-auto max-w-4xl px-4">
+    <header class="py-10 text-center">
+      <p class="arabic text-[2.6rem] font-bold text-emerald-800 dark:text-emerald-300" lang="ar">سُورَةُ {s.arabicName}</p>
+      <h1 class="mt-2 text-3xl font-extrabold tracking-tight sm:text-4xl">{h1}</h1>
+      <p class="mt-3 text-sm text-slate-500">
+        {s.meaning && `${s.meaning} · `}{s.revelation} ·{s.ayahCount} ayat · {s.rukuCount} {s.rukuCount === 1 ? 'ruku' : 'rukus'} · Translation: {tr.translator}
+      </p>
+      <div class="no-print mt-6 flex flex-wrap items-center justify-center gap-2 text-sm font-semibold">
+        <button type="button" data-play-all class="rounded-full bg-emerald-600 px-5 py-2.5 text-white shadow-lg shadow-emerald-600/20 hover:bg-emerald-700">▶ Listen</button>
+        {fullAudio && <a href={fullAudio.url} download class="rounded-full border border-slate-200 px-5 py-2.5 hover:border-emerald-500 dark:border-slate-700">Download MP3</a>}
+        <button type="button" onclick="window.print()" class="rounded-full border border-slate-200 px-5 py-2.5 hover:border-emerald-500 dark:border-slate-700">Print / Save PDF</button>
+      </div>
+      <nav class="no-print mt-4 flex flex-wrap justify-center gap-2 text-xs" aria-label="Translations">
+        <span class="rounded-full bg-emerald-600/10 px-3 py-1 font-bold text-emerald-800 dark:text-emerald-300">{tr.label}</span>
+        {otherLangs.map((l) => <a href={surahUrl(s, l)} class="rounded-full border border-slate-200 px-3 py-1 hover:border-emerald-500 dark:border-slate-700">{surahTitle(s)} in {TRANSLATIONS[l].label}</a>)}
+      </nav>
+    </header>
+
+    {s.number !== 1 && s.number !== 9 && (
+      <p class="arabic mb-2 text-center text-slate-800 dark:text-slate-200" lang="ar">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
+    )}
+
+    <div class="ayah-list">
+      {s.ayahs.map((a) => <AyahBlock ayah={a} surah={s} langs={[lang]} />)}
+    </div>
+
+    <section class="mt-16 space-y-4">
+      <h2 class="text-2xl font-extrabold tracking-tight">About {surahTitle(s)}</h2>
+      {aboutSurah(s).map((p) => <p class="leading-relaxed text-slate-700 dark:text-slate-300">{p}</p>)}
+      <Facts rows={surahFacts(s)} />
+      <p class="text-sm text-slate-500">
+        Read the commentary on any verse – for example <a href={ayahUrl(s, 1)} class="text-emerald-700 underline dark:text-emerald-400">{surahTitle(s)} ayah 1 tafsir</a> – from Ibn Kathir, Ma'ariful Qur'an and Tazkirul Quran.
+      </p>
+      {inCollections.length > 0 && (
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          {surahTitle(s)} is part of {inCollections.map((c, i) => <>{i > 0 && ', '}<a href={`/${c.slug}`} class="text-emerald-700 underline dark:text-emerald-400">{c.short}</a></>)}.
+        </p>
+      )}
+    </section>
+
+    <Faq title={`${surahTitle(s)}: common questions`} items={surahFaq(s, lang)} />
+
+    <nav class="no-print mt-16 grid gap-3 sm:grid-cols-2" aria-label="Surah navigation">
+      {prev ? (
+        <a href={surahUrl(prev, lang)} class="rounded-2xl border border-slate-200 p-5 hover:border-emerald-500 dark:border-slate-800">
+          <span class="text-xs text-slate-500">← Previous surah ({prev.number})</span>
+          <span class="mt-1 block font-bold">Surah {popularName(prev)}</span>
+        </a>
+      ) : <span />}
+      {next && (
+        <a href={surahUrl(next, lang)} class="rounded-2xl border border-slate-200 p-5 text-right hover:border-emerald-500 dark:border-slate-800">
+          <span class="text-xs text-slate-500">Next surah ({next.number}) →</span>
+          <span class="mt-1 block font-bold">Surah {popularName(next)}</span>
+        </a>
+      )}
+    </nav>
+  </div>
+</Base>

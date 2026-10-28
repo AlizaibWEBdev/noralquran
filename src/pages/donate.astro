@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+const usdtAddress = '0xb05df67a1c60f6014c64886f3d9a6eddb656c44e';
+---
+
+<Base
+  title="Support Nur al-Quran – Donate"
+  description="Help keep Nur al-Quran free and ad-free for everyone. Donations cover hosting and development."
+  path="/donate"
+  crumbs={[{ name: 'Donate', url: '/donate' }]}
+>
+  <div class="mx-auto max-w-2xl px-4 py-12 text-center">
+    <h1 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Support the Mission</h1>
+    <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">
+      Your contributions keep Nur al-Quran free and ad-free. Every verse read through this site becomes sadaqah jariyah for those who help keep it alive.
+    </p>
+    <div class="mt-10 rounded-3xl border border-slate-200 bg-white p-8 dark:border-slate-800 dark:bg-slate-900">
+      <h2 class="text-xl font-bold">USDT (BEP20) address</h2>
+      <p class="mt-2 text-sm text-slate-500">Use the <strong>BNB Smart Chain (BEP20)</strong> network to avoid loss of funds.</p>
+      <p id="wallet" class="mt-6 select-all break-all rounded-2xl bg-slate-50 p-4 font-mono text-sm dark:bg-slate-800">{usdtAddress}</p>
+      <button id="copy" type="button" class="mt-4 w-full rounded-2xl bg-slate-900 py-4 text-sm font-bold uppercase tracking-wider text-white dark:bg-white dark:text-slate-900">Copy wallet address</button>
+    </div>
+  </div>
+</Base>
+
+<script>
+  const btn = document.getElementById('copy')!;
+  btn.addEventListener('click', async () => {
+    await navigator.clipboard.writeText(document.getElementById('wallet')!.textContent!.trim());
+    btn.textContent = 'Copied';
+    setTimeout(() => (btn.textContent = 'Copy wallet address'), 2000);
+  });
+</script>

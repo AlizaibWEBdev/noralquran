@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Page not found – Nur al-Quran" description="This page does not exist." path="/404" noindex>
+  <div class="mx-auto max-w-xl px-4 py-24 text-center">
+    <h1 class="text-3xl font-extrabold tracking-tight">Page not found</h1>
+    <p class="mt-4 text-slate-600 dark:text-slate-400">The page you are looking for does not exist. Try the full list of surahs or paras.</p>
+    <div class="mt-8 flex justify-center gap-3 text-sm font-semibold">
+      <a href="/#surahs" class="rounded-full bg-emerald-600 px-5 py-2.5 text-white">All surahs</a>
+      <a href="/para" class="rounded-full border border-slate-300 px-5 py-2.5 dark:border-slate-700">All paras</a>
+    </div>
+  </div>
+</Base>

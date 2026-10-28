@@ -1,0 +1,1179 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "astro",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/_astro/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/surah/:old(1|al-fatiha|fatihah|al-fatihah|alhamd)",
+      "destination": "/surah/fatiha",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(1|al-fatiha|fatihah|al-fatihah|alhamd)/:rest+",
+      "destination": "/surah/fatiha/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(2|al-baqarah|baqara|baqra)",
+      "destination": "/surah/baqarah",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(2|al-baqarah|baqara|baqra)/:rest+",
+      "destination": "/surah/baqarah/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(3|aal-e-imran|ale-imran|imran)",
+      "destination": "/surah/al-imran",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(3|aal-e-imran|ale-imran|imran)/:rest+",
+      "destination": "/surah/al-imran/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(4|an-nisa|nisaa)",
+      "destination": "/surah/nisa",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(4|an-nisa|nisaa)/:rest+",
+      "destination": "/surah/nisa/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(5|al-maidah|maida)",
+      "destination": "/surah/maidah",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(5|al-maidah|maida)/:rest+",
+      "destination": "/surah/maidah/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(6|al-anam|anaam)",
+      "destination": "/surah/anam",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(6|al-anam|anaam)/:rest+",
+      "destination": "/surah/anam/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(7|al-araf|aaraf)",
+      "destination": "/surah/araf",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(7|al-araf|aaraf)/:rest+",
+      "destination": "/surah/araf/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(8|al-anfal)",
+      "destination": "/surah/anfal",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(8|al-anfal)/:rest+",
+      "destination": "/surah/anfal/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(9|at-tawbah|taubah|tauba|baraah)",
+      "destination": "/surah/tawbah",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(9|at-tawbah|taubah|tauba|baraah)/:rest+",
+      "destination": "/surah/tawbah/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(10|younus)",
+      "destination": "/surah/yunus",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(10|younus)/:rest+",
+      "destination": "/surah/yunus/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(11|hood)",
+      "destination": "/surah/hud",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(11|hood)/:rest+",
+      "destination": "/surah/hud/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(12|yousuf)",
+      "destination": "/surah/yusuf",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(12|yousuf)/:rest+",
+      "destination": "/surah/yusuf/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(13|ar-rad|raad)",
+      "destination": "/surah/rad",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(13|ar-rad|raad)/:rest+",
+      "destination": "/surah/rad/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(14|ibraheem)",
+      "destination": "/surah/ibrahim",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(14|ibraheem)/:rest+",
+      "destination": "/surah/ibrahim/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(15|al-hijr)",
+      "destination": "/surah/hijr",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(15|al-hijr)/:rest+",
+      "destination": "/surah/hijr/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(16|an-nahl)",
+      "destination": "/surah/nahl",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(16|an-nahl)/:rest+",
+      "destination": "/surah/nahl/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(17|al-isra|bani-israel|bani-israil)",
+      "destination": "/surah/isra",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(17|al-isra|bani-israel|bani-israil)/:rest+",
+      "destination": "/surah/isra/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(18|al-kahf|kahaf)",
+      "destination": "/surah/kahf",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(18|al-kahf|kahaf)/:rest+",
+      "destination": "/surah/kahf/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(19|mariam)",
+      "destination": "/surah/maryam",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(19|mariam)/:rest+",
+      "destination": "/surah/maryam/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(20|ta-ha)",
+      "destination": "/surah/taha",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(20|ta-ha)/:rest+",
+      "destination": "/surah/taha/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(21|al-anbiya)",
+      "destination": "/surah/anbiya",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(21|al-anbiya)/:rest+",
+      "destination": "/surah/anbiya/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(22|al-hajj)",
+      "destination": "/surah/hajj",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(22|al-hajj)/:rest+",
+      "destination": "/surah/hajj/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(23|al-muminun|muminoon|mominoon)",
+      "destination": "/surah/muminun",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(23|al-muminun|muminoon|mominoon)/:rest+",
+      "destination": "/surah/muminun/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(24|an-nur|nur)",
+      "destination": "/surah/noor",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(24|an-nur|nur)/:rest+",
+      "destination": "/surah/noor/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(25|al-furqan)",
+      "destination": "/surah/furqan",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(25|al-furqan)/:rest+",
+      "destination": "/surah/furqan/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(26|ash-shuara)",
+      "destination": "/surah/shuara",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(26|ash-shuara)/:rest+",
+      "destination": "/surah/shuara/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(27|an-naml)",
+      "destination": "/surah/naml",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(27|an-naml)/:rest+",
+      "destination": "/surah/naml/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(28|al-qasas)",
+      "destination": "/surah/qasas",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(28|al-qasas)/:rest+",
+      "destination": "/surah/qasas/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(29|al-ankabut|ankaboot)",
+      "destination": "/surah/ankabut",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(29|al-ankabut|ankaboot)/:rest+",
+      "destination": "/surah/ankabut/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(30|ar-rum|room)",
+      "destination": "/surah/rum",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(30|ar-rum|room)/:rest+",
+      "destination": "/surah/rum/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(31|luqmaan)",
+      "destination": "/surah/luqman",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(31|luqmaan)/:rest+",
+      "destination": "/surah/luqman/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(32|as-sajdah|sajda|alif-lam-meem-sajdah)",
+      "destination": "/surah/sajdah",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(32|as-sajdah|sajda|alif-lam-meem-sajdah)/:rest+",
+      "destination": "/surah/sajdah/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(33|al-ahzab)",
+      "destination": "/surah/ahzab",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(33|al-ahzab)/:rest+",
+      "destination": "/surah/ahzab/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(34|sabaa)",
+      "destination": "/surah/saba",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(34|sabaa)/:rest+",
+      "destination": "/surah/saba/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(35|faatir)",
+      "destination": "/surah/fatir",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(35|faatir)/:rest+",
+      "destination": "/surah/fatir/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(36|yasin|ya-sin|yaaseen)",
+      "destination": "/surah/yaseen",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(36|yasin|ya-sin|yaaseen)/:rest+",
+      "destination": "/surah/yaseen/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(37|as-saffat|saaffat)",
+      "destination": "/surah/saffat",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(37|as-saffat|saaffat)/:rest+",
+      "destination": "/surah/saffat/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(38|saad)",
+      "destination": "/surah/sad",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(38|saad)/:rest+",
+      "destination": "/surah/sad/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(39|az-zumar)",
+      "destination": "/surah/zumar",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(39|az-zumar)/:rest+",
+      "destination": "/surah/zumar/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(40|al-mumin|momin)",
+      "destination": "/surah/ghafir",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(40|al-mumin|momin)/:rest+",
+      "destination": "/surah/ghafir/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(41|ha-meem-sajdah|hamim-sajdah)",
+      "destination": "/surah/fussilat",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(41|ha-meem-sajdah|hamim-sajdah)/:rest+",
+      "destination": "/surah/fussilat/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(42|ash-shura)",
+      "destination": "/surah/shura",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(42|ash-shura)/:rest+",
+      "destination": "/surah/shura/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(43|az-zukhruf)",
+      "destination": "/surah/zukhruf",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(43|az-zukhruf)/:rest+",
+      "destination": "/surah/zukhruf/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(44|ad-dukhan)",
+      "destination": "/surah/dukhan",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(44|ad-dukhan)/:rest+",
+      "destination": "/surah/dukhan/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(45|al-jathiyah|jasia|jathiya)",
+      "destination": "/surah/jathiyah",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(45|al-jathiyah|jasia|jathiya)/:rest+",
+      "destination": "/surah/jathiyah/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(46|al-ahqaf)",
+      "destination": "/surah/ahqaf",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(46|al-ahqaf)/:rest+",
+      "destination": "/surah/ahqaf/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(47|muhammed)",
+      "destination": "/surah/muhammad",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(47|muhammed)/:rest+",
+      "destination": "/surah/muhammad/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(48|al-fath|fatah|inna-fatahna)",
+      "destination": "/surah/fath",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(48|al-fath|fatah|inna-fatahna)/:rest+",
+      "destination": "/surah/fath/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(49|al-hujurat)",
+      "destination": "/surah/hujurat",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(49|al-hujurat)/:rest+",
+      "destination": "/surah/hujurat/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(50|qaaf)",
+      "destination": "/surah/qaf",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(50|qaaf)/:rest+",
+      "destination": "/surah/qaf/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(51|adh-dhariyat|dhariyat)",
+      "destination": "/surah/zariyat",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(51|adh-dhariyat|dhariyat)/:rest+",
+      "destination": "/surah/zariyat/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(52|at-tur|toor)",
+      "destination": "/surah/tur",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(52|at-tur|toor)/:rest+",
+      "destination": "/surah/tur/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(53|an-najm)",
+      "destination": "/surah/najm",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(53|an-najm)/:rest+",
+      "destination": "/surah/najm/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(54|al-qamar)",
+      "destination": "/surah/qamar",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(54|al-qamar)/:rest+",
+      "destination": "/surah/qamar/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(55|ar-rahman|rehman|ar-rehman)",
+      "destination": "/surah/rahman",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(55|ar-rahman|rehman|ar-rehman)/:rest+",
+      "destination": "/surah/rahman/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(56|al-waqiah|waqia|waqiyah)",
+      "destination": "/surah/waqiah",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(56|al-waqiah|waqia|waqiyah)/:rest+",
+      "destination": "/surah/waqiah/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(57|al-hadid|hadeed)",
+      "destination": "/surah/hadid",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(57|al-hadid|hadeed)/:rest+",
+      "destination": "/surah/hadid/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(58|al-mujadila|mujadilah)",
+      "destination": "/surah/mujadila",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(58|al-mujadila|mujadilah)/:rest+",
+      "destination": "/surah/mujadila/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(59|al-hashr)",
+      "destination": "/surah/hashr",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(59|al-hashr)/:rest+",
+      "destination": "/surah/hashr/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(60|al-mumtahanah|mumtahina)",
+      "destination": "/surah/mumtahanah",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(60|al-mumtahanah|mumtahina)/:rest+",
+      "destination": "/surah/mumtahanah/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(61|as-saff)",
+      "destination": "/surah/saff",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(61|as-saff)/:rest+",
+      "destination": "/surah/saff/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(62|al-jumuah|jumuah|jumma)",
+      "destination": "/surah/juma",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(62|al-jumuah|jumuah|jumma)/:rest+",
+      "destination": "/surah/juma/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(63|al-munafiqun|munafiqoon)",
+      "destination": "/surah/munafiqun",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(63|al-munafiqun|munafiqoon)/:rest+",
+      "destination": "/surah/munafiqun/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(64|at-taghabun)",
+      "destination": "/surah/taghabun",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(64|at-taghabun)/:rest+",
+      "destination": "/surah/taghabun/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(65|at-talaq)",
+      "destination": "/surah/talaq",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(65|at-talaq)/:rest+",
+      "destination": "/surah/talaq/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(66|at-tahrim|tahreem)",
+      "destination": "/surah/tahrim",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(66|at-tahrim|tahreem)/:rest+",
+      "destination": "/surah/tahrim/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(67|al-mulk|tabarak)",
+      "destination": "/surah/mulk",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(67|al-mulk|tabarak)/:rest+",
+      "destination": "/surah/mulk/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(68|al-qalam)",
+      "destination": "/surah/qalam",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(68|al-qalam)/:rest+",
+      "destination": "/surah/qalam/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(69|al-haqqah|haqqa)",
+      "destination": "/surah/haqqah",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(69|al-haqqah|haqqa)/:rest+",
+      "destination": "/surah/haqqah/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(70|al-maarij)",
+      "destination": "/surah/maarij",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(70|al-maarij)/:rest+",
+      "destination": "/surah/maarij/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(71|nooh)",
+      "destination": "/surah/nuh",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(71|nooh)/:rest+",
+      "destination": "/surah/nuh/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(72|al-jinn)",
+      "destination": "/surah/jinn",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(72|al-jinn)/:rest+",
+      "destination": "/surah/jinn/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(73|al-muzzammil|muzzammil)",
+      "destination": "/surah/muzammil",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(73|al-muzzammil|muzzammil)/:rest+",
+      "destination": "/surah/muzammil/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(74|al-muddaththir|muddassir|mudassir)",
+      "destination": "/surah/muddaththir",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(74|al-muddaththir|muddassir|mudassir)/:rest+",
+      "destination": "/surah/muddaththir/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(75|al-qiyamah|qiyama)",
+      "destination": "/surah/qiyamah",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(75|al-qiyamah|qiyama)/:rest+",
+      "destination": "/surah/qiyamah/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(76|al-insan|dahr|dahar)",
+      "destination": "/surah/insan",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(76|al-insan|dahr|dahar)/:rest+",
+      "destination": "/surah/insan/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(77|al-mursalat)",
+      "destination": "/surah/mursalat",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(77|al-mursalat)/:rest+",
+      "destination": "/surah/mursalat/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(78|an-naba)",
+      "destination": "/surah/naba",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(78|an-naba)/:rest+",
+      "destination": "/surah/naba/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(79|an-naziat)",
+      "destination": "/surah/naziat",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(79|an-naziat)/:rest+",
+      "destination": "/surah/naziat/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(80|abas)",
+      "destination": "/surah/abasa",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(80|abas)/:rest+",
+      "destination": "/surah/abasa/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(81|at-takwir)",
+      "destination": "/surah/takwir",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(81|at-takwir)/:rest+",
+      "destination": "/surah/takwir/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(82|al-infitar)",
+      "destination": "/surah/infitar",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(82|al-infitar)/:rest+",
+      "destination": "/surah/infitar/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(83|al-mutaffifin)",
+      "destination": "/surah/mutaffifin",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(83|al-mutaffifin)/:rest+",
+      "destination": "/surah/mutaffifin/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(84|al-inshiqaq)",
+      "destination": "/surah/inshiqaq",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(84|al-inshiqaq)/:rest+",
+      "destination": "/surah/inshiqaq/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(85|al-buruj|burooj)",
+      "destination": "/surah/buruj",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(85|al-buruj|burooj)/:rest+",
+      "destination": "/surah/buruj/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(86|at-tariq)",
+      "destination": "/surah/tariq",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(86|at-tariq)/:rest+",
+      "destination": "/surah/tariq/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(87|al-ala)",
+      "destination": "/surah/ala",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(87|al-ala)/:rest+",
+      "destination": "/surah/ala/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(88|al-ghashiyah|ghashiya)",
+      "destination": "/surah/ghashiyah",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(88|al-ghashiyah|ghashiya)/:rest+",
+      "destination": "/surah/ghashiyah/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(89|al-fajr)",
+      "destination": "/surah/fajr",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(89|al-fajr)/:rest+",
+      "destination": "/surah/fajr/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(90|al-balad)",
+      "destination": "/surah/balad",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(90|al-balad)/:rest+",
+      "destination": "/surah/balad/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(91|ash-shams)",
+      "destination": "/surah/shams",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(91|ash-shams)/:rest+",
+      "destination": "/surah/shams/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(92|al-layl|layl|lael)",
+      "destination": "/surah/lail",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(92|al-layl|layl|lael)/:rest+",
+      "destination": "/surah/lail/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(93|ad-duha|zuha)",
+      "destination": "/surah/duha",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(93|ad-duha|zuha)/:rest+",
+      "destination": "/surah/duha/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(94|ash-sharh|sharh|alam-nashrah)",
+      "destination": "/surah/inshirah",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(94|ash-sharh|sharh|alam-nashrah)/:rest+",
+      "destination": "/surah/inshirah/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(95|at-tin|teen)",
+      "destination": "/surah/tin",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(95|at-tin|teen)/:rest+",
+      "destination": "/surah/tin/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(96|al-alaq|iqra)",
+      "destination": "/surah/alaq",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(96|al-alaq|iqra)/:rest+",
+      "destination": "/surah/alaq/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(97|al-qadr)",
+      "destination": "/surah/qadr",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(97|al-qadr)/:rest+",
+      "destination": "/surah/qadr/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(98|al-bayyinah)",
+      "destination": "/surah/bayyinah",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(98|al-bayyinah)/:rest+",
+      "destination": "/surah/bayyinah/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(99|az-zalzalah|zalzalah|zilzaal)",
+      "destination": "/surah/zilzal",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(99|az-zalzalah|zalzalah|zilzaal)/:rest+",
+      "destination": "/surah/zilzal/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(100|al-adiyat)",
+      "destination": "/surah/adiyat",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(100|al-adiyat)/:rest+",
+      "destination": "/surah/adiyat/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(101|al-qariah)",
+      "destination": "/surah/qariah",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(101|al-qariah)/:rest+",
+      "destination": "/surah/qariah/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(102|at-takathur)",
+      "destination": "/surah/takathur",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(102|at-takathur)/:rest+",
+      "destination": "/surah/takathur/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(103|al-asr)",
+      "destination": "/surah/asr",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(103|al-asr)/:rest+",
+      "destination": "/surah/asr/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(104|al-humazah)",
+      "destination": "/surah/humazah",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(104|al-humazah)/:rest+",
+      "destination": "/surah/humazah/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(105|al-fil|feel)",
+      "destination": "/surah/fil",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(105|al-fil|feel)/:rest+",
+      "destination": "/surah/fil/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(106|quraysh)",
+      "destination": "/surah/quraish",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(106|quraysh)/:rest+",
+      "destination": "/surah/quraish/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(107|al-maun)",
+      "destination": "/surah/maun",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(107|al-maun)/:rest+",
+      "destination": "/surah/maun/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(108|al-kawthar|kausar|kauthar)",
+      "destination": "/surah/kawthar",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(108|al-kawthar|kausar|kauthar)/:rest+",
+      "destination": "/surah/kawthar/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(109|al-kafirun|kafiroon)",
+      "destination": "/surah/kafirun",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(109|al-kafirun|kafiroon)/:rest+",
+      "destination": "/surah/kafirun/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(110|an-nasr)",
+      "destination": "/surah/nasr",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(110|an-nasr)/:rest+",
+      "destination": "/surah/nasr/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(111|al-masad|masad|tabbat)",
+      "destination": "/surah/lahab",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(111|al-masad|masad|tabbat)/:rest+",
+      "destination": "/surah/lahab/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(112|al-ikhlas)",
+      "destination": "/surah/ikhlas",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(112|al-ikhlas)/:rest+",
+      "destination": "/surah/ikhlas/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(113|al-falaq)",
+      "destination": "/surah/falaq",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(113|al-falaq)/:rest+",
+      "destination": "/surah/falaq/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(114|an-nas|naas)",
+      "destination": "/surah/nas",
+      "permanent": true
+    },
+    {
+      "source": "/surah/:old(114|an-nas|naas)/:rest+",
+      "destination": "/surah/nas/:rest+",
+      "permanent": true
+    },
+    {
+      "source": "/surah",
+      "destination": "/#surahs",
+      "permanent": true
+    },
+    {
+      "source": "/:kind(juz|sipara|parah)/:n(\\d+)",
+      "destination": "/para/:n",
+      "permanent": true
+    },
+    {
+      "source": "/:kind(juz|sipara|parah)",
+      "destination": "/para",
+      "permanent": true
+    },
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    }
+  ]
+}

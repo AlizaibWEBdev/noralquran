@@ -1,0 +1,100 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-arabic: 'Scheherazade New', 'Amiri', serif;
+  --font-urdu: 'Noto Nastaliq Urdu', 'Noto Naskh Arabic', serif;
+  --color-paper: #fcfcf9;
+  --color-ink: #0b0f1a;
+}
+
+:root {
+  --arabic-size: 2rem;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  @apply bg-paper text-slate-900 dark:bg-ink dark:text-slate-100;
+  overflow-x: hidden;
+}
+
+@layer components {
+  .arabic {
+    font-family: var(--font-arabic);
+    direction: rtl;
+    font-size: var(--arabic-size);
+    line-height: 2.3;
+    word-spacing: 0.15em;
+  }
+
+  .urdu {
+    font-family: var(--font-urdu);
+    direction: rtl;
+    line-height: 2.4;
+  }
+
+  .prose-tafsir h2,
+  .prose-tafsir h3 {
+    @apply mt-6 mb-2 text-base font-bold text-emerald-700 dark:text-emerald-400;
+  }
+  .prose-tafsir p {
+    @apply my-3 leading-relaxed;
+  }
+  .prose-tafsir blockquote {
+    @apply border-l-2 border-emerald-500/30 pl-4 italic;
+  }
+  .prose-tafsir ul,
+  .prose-tafsir ol {
+    @apply my-3 list-inside list-disc;
+  }
+
+  .ayah-mark {
+    @apply mx-1 inline-flex h-[1.4em] w-[1.4em] items-center justify-center rounded-full border border-emerald-600/30 align-middle font-sans text-[0.4em] font-bold text-emerald-700 dark:text-emerald-300;
+  }
+}
+
+/* Reader preferences, toggled from the settings panel */
+.hide-translit .translit,
+.hide-translation .translation {
+  display: none;
+}
+
+/* Mushaf mode: verses flow inline, only Arabic is shown */
+.mushaf .ayah {
+  display: inline;
+  padding: 0;
+  border: 0;
+}
+.mushaf .ayah > :not(.arabic) {
+  display: none;
+}
+.mushaf .ayah .arabic {
+  display: inline;
+}
+.mushaf .ayah-list {
+  text-align: justify;
+  direction: rtl;
+}
+
+.ayah.is-playing {
+  @apply rounded-2xl bg-emerald-500/[0.06] ring-1 ring-emerald-500/20;
+}
+
+@media print {
+  header,
+  footer,
+  .no-print,
+  #player {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+    color: #000;
+  }
+}

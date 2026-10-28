@@ -1,0 +1,12 @@
+---
+import SurahPage from '../../components/SurahPage.astro';
+import { getSurahs } from '../../lib/quran';
+
+export function getStaticPaths() {
+  return getSurahs().map((surah) => ({ params: { slug: surah.slug }, props: { surah } }));
+}
+
+const { surah } = Astro.props;
+---
+
+<SurahPage surah={surah} lang="english" />

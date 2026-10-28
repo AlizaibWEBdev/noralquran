@@ -1,0 +1,121 @@
+---
+import Base from '../layouts/Base.astro';
+import Faq from '../components/Faq.astro';
+import { SITE, SITE_NAME, getSurahs, getParas, surahUrl, paraUrl, popularName } from '../lib/quran';
+import { COLLECTIONS } from '../lib/collections';
+
+const surahs = getSurahs();
+const paras = getParas();
+const popular = [36, 67, 55, 56, 18, 73, 1, 2, 62, 48, 32, 44].map((n) => surahs[n - 1]);
+const slugs = surahs.map((s) => s.slug);
+
+const faq = [
+  { q: 'Can I read the Quran online for free?', a: 'Yes. Every surah, para and ayah on Nur al-Quran is free to read and listen to, with no sign-up and no ads.' },
+  { q: 'Which translations are available?', a: 'English by Saheeh International, Urdu by Fateh Muhammad Jalandhry and Bangla by Muhiuddin Khan, alongside the Arabic Uthmani text and an English transliteration.' },
+  { q: 'Can I listen to the Quran online?', a: 'Yes. Every surah, para and collection has a Listen button that plays the recitation of Mishary Rashid Alafasy verse by verse, highlighting each ayah as it is recited.' },
+  { q: 'Is there tafsir?', a: 'Yes. Each ayah page includes commentary from Tafsir Ibn Kathir, Ma\'ariful Qur\'an and Tazkirul Quran.' },
+  { q: 'How do I read the Quran para by para?', a: 'Open the Para section to read the Quran in 30 parts, from Para 1 (Alif Lam Meem) to Para 30 (Amma Yatasa\'aloon). Reading one para a day completes the Quran in a month.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE_NAME, url: SITE + '/', inLanguage: 'en' },
+  { '@context': 'https://schema.org', '@type': 'Organization', name: SITE_NAME, url: SITE + '/', logo: SITE + '/quraan.png' },
+];
+---
+
+<Base
+  title="Read Quran Online – Al Quran with Translation, Audio & Tafsir"
+  description="Read the Holy Quran online free: all 114 surahs and 30 paras in Arabic with English, Urdu and Bangla translation, transliteration, verse-by-verse audio and tafsir."
+  path="/"
+  jsonLd={jsonLd}
+>
+  <!-- Old links used hash routes (/#/surah/36); send them to the real pages. -->
+  <script is:inline define:vars={{ slugs }}>
+    const m = location.hash.match(/^#\/(surah\/(\d+)|bookmarks|donate)/);
+    if (m) location.replace(m[2] ? '/surah/' + slugs[m[2] - 1] : '/' + m[1]);
+  </script>
+
+  <div class="mx-auto max-w-6xl px-4">
+    <header class="py-14 text-center">
+      <p class="arabic text-[2.6rem] text-emerald-800 dark:text-emerald-300" lang="ar">ٱلْقُرْآنُ ٱلْكَرِيمُ</p>
+      <h1 class="mt-2 text-4xl font-extrabold tracking-tight sm:text-5xl">Read Quran Online</h1>
+      <p class="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600 dark:text-slate-400">
+        The Holy Quran in Arabic with English, Urdu and Bangla translation, transliteration, verse-by-verse audio and tafsir.
+        Read any surah, para or ayah – free and without ads.
+      </p>
+      <label class="mx-auto mt-8 block max-w-xl">
+        <span class="sr-only">Search surahs</span>
+        <input id="surah-search" type="search" placeholder="Search surah by name or number…" class="w-full rounded-2xl border border-slate-200 bg-white px-5 py-4 text-lg shadow-lg shadow-slate-200/30 outline-none focus:border-emerald-500 dark:border-slate-800 dark:bg-slate-900 dark:shadow-none" />
+      </label>
+    </header>
+
+    <section aria-labelledby="popular-h">
+      <h2 id="popular-h" class="mb-4 text-xl font-extrabold tracking-tight">Popular surahs</h2>
+      <ul class="flex flex-wrap gap-2">
+        {popular.map((s) => <li><a href={surahUrl(s)} class="block rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold hover:border-emerald-500 dark:border-slate-800 dark:bg-slate-900">Surah {popularName(s)}</a></li>)}
+        {COLLECTIONS.map((c) => <li><a href={`/${c.slug}`} class="block rounded-full border border-emerald-600/30 bg-emerald-600/5 px-4 py-2 text-sm font-semibold hover:border-emerald-500">{c.short}</a></li>)}
+      </ul>
+    </section>
+
+    <section id="surahs" aria-labelledby="surahs-h" class="mt-14 scroll-mt-24">
+      <h2 id="surahs-h" class="mb-4 text-xl font-extrabold tracking-tight">All 114 surahs</h2>
+      <ol class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {surahs.map((s) => (
+          <li data-search={`${s.number} ${s.slug} ${s.name} ${s.aliases.join(' ')} ${s.meaning ?? ''}`.toLowerCase()}>
+            <a href={surahUrl(s)} class="flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-4 hover:border-emerald-500 dark:border-slate-800 dark:bg-slate-900">
+              <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-sm font-bold text-slate-500 dark:bg-slate-800">{s.number}</span>
+              <span class="min-w-0 flex-1">
+                <span class="block font-bold">Surah {popularName(s)}</span>
+                <span class="block truncate text-xs text-slate-500">{s.meaning && `${s.meaning} · `}{s.ayahCount} ayat · {s.revelation}</span>
+              </span>
+              <span class="arabic text-2xl" lang="ar">{s.arabicName}</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+      <p id="no-results" hidden class="py-10 text-center text-slate-500">No surah matches your search.</p>
+    </section>
+
+    <section aria-labelledby="para-h" class="mt-14">
+      <h2 id="para-h" class="mb-4 text-xl font-extrabold tracking-tight">Read by para (juz)</h2>
+      <ol class="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
+        {paras.map((p) => (
+          <li><a href={paraUrl(p.number)} class="block rounded-xl border border-slate-200 bg-white p-3 text-sm hover:border-emerald-500 dark:border-slate-800 dark:bg-slate-900"><span class="font-bold">Para {p.number}</span><span class="block truncate text-xs text-slate-500">{p.name}</span></a></li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="mt-14 grid gap-6 md:grid-cols-3">
+      <div>
+        <h2 class="mb-2 text-lg font-bold">Arabic with translation</h2>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-400">Every surah is available with <a href={surahUrl(surahs[35])} class="text-emerald-700 underline dark:text-emerald-400">English</a>, <a href={surahUrl(surahs[35], 'urdu')} class="text-emerald-700 underline dark:text-emerald-400">Urdu</a> and <a href={surahUrl(surahs[35], 'bangla')} class="text-emerald-700 underline dark:text-emerald-400">Bangla</a> translation under each ayah, plus transliteration for readers learning Arabic.</p>
+      </div>
+      <div>
+        <h2 class="mb-2 text-lg font-bold">Listen verse by verse</h2>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-400">Press Listen on any page to hear the recitation of Mishary Rashid Alafasy. The current ayah is highlighted, so you can follow along or memorise.</p>
+      </div>
+      <div>
+        <h2 class="mb-2 text-lg font-bold">Tafsir for every ayah</h2>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-400">Open any verse to read commentary from Tafsir Ibn Kathir, Ma'ariful Qur'an and Tazkirul Quran – for example <a href="/ayatul-kursi" class="text-emerald-700 underline dark:text-emerald-400">Ayatul Kursi</a>.</p>
+      </div>
+    </section>
+
+    <Faq title="Frequently asked questions" items={faq} />
+  </div>
+</Base>
+
+<script>
+  const input = document.getElementById('surah-search') as HTMLInputElement;
+  const items = [...document.querySelectorAll<HTMLElement>('[data-search]')];
+  const empty = document.getElementById('no-results')!;
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    let shown = 0;
+    for (const li of items) {
+      const hit = !q || li.dataset.search!.includes(q);
+      li.hidden = !hit;
+      if (hit) shown++;
+    }
+    empty.hidden = shown > 0;
+  });
+</script>
